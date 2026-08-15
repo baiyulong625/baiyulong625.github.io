@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-paper: #fafaf9;
+  --color-ink: #1c1917;
+  --color-muted: #78716c;
+  --color-line: #e7e5e4;
+  --color-accent: #b4472b;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-serif: "Songti SC", "STSong", "Noto Serif SC", Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-accent) 15%, transparent);
+}
+
+/* 文章正文排版微调 */
+.prose {
+  line-height: 1.9;
+}
+.prose :where(p) {
+  line-height: 1.9;
+}
+.prose :where(pre) {
+  background-color: var(--color-ink);
+  color: #fafaf9;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+.prose :where(code):not(:where(pre code)) {
+  background-color: #f1efec;
+  color: var(--color-accent);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+}
+.prose :where(pre code) {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+.prose :where(a) {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+.prose :where(a:hover) {
+  text-decoration: underline;
+}
