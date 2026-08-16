@@ -10,7 +10,6 @@ export default function Footer() {
             子非鱼
           </Link>
         </p>
-        <p className="text-xs text-muted/70">用 Next.js 与 ❤️ 打造</p>
       </div>
     </footer>
   );
