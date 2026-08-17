@@ -1,0 +1,8 @@
+{
+  // 本项目使用 Tailwind CSS v4，globals.css 里的 @theme / @plugin / @custom-variant
+  // 是 Tailwind 专有语法，VS Code 内置 CSS 校验器不认识会标红（误报）。
+  // 关闭内置校验，改用 Tailwind CSS IntelliSense 插件提供智能提示。
+  "css.validate": false,
+  "scss.validate": false,
+  "less.validate": false
+}

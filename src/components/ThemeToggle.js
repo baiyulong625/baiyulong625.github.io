@@ -1,6 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+// 订阅外部系统：监听 <html> 标签 class 属性的变化（主题切换）。
+// React 会在外部状态变化时重新读取 getSnapshot() 的结果。
+function subscribe(onStoreChange) {
+  const observer = new MutationObserver(onStoreChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  return () => observer.disconnect();
+}
+
+// 客户端读取当前主题
+function getSnapshot() {
+  return document.documentElement.classList.contains("dark");
+}
+
+// 服务端渲染时无法访问 DOM，统一按亮色处理（不会造成 hydration 不一致）
+function getServerSnapshot() {
+  return false;
+}
 
 function SunIcon() {
   return (
@@ -49,16 +70,11 @@ function MoonIcon() {
 }
 
 export default function ThemeToggle() {
-  const [dark, setDark] = useState(false);
-
-  // 初次渲染后，从 html 标签上读取当前主题，避免与服务端渲染不一致
-  useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
-  }, []);
+  const dark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   function toggle() {
     const next = !dark;
-    setDark(next);
+    // 切换主题：改 <html> 的 .dark 类，并记住用户的选择
     document.documentElement.classList.toggle("dark", next);
     try {
       localStorage.setItem("theme", next ? "dark" : "light");
