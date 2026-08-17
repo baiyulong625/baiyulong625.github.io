@@ -14,6 +14,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="zh-CN">
       <body className="flex min-h-screen flex-col">
+        {/* 首屏渲染前应用暗色模式，避免闪烁（FOUC） */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark")}}catch(e){}})();`,
+          }}
+        />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

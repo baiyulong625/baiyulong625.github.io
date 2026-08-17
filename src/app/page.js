@@ -37,7 +37,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-white">
+      <section className="border-t border-line bg-panel">
         <div className="mx-auto grid max-w-5xl gap-10 px-5 py-20 md:grid-cols-2 md:gap-12">
           <Link href="/daily" className="group">
             <p className="text-xs uppercase tracking-widest text-accent">
